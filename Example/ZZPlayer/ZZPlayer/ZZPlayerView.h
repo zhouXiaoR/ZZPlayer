@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ZZPlayerView : UIView
 
 
-
 @end
 
 NS_ASSUME_NONNULL_END

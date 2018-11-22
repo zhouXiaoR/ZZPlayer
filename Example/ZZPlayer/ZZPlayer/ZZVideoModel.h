@@ -11,6 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZZVideoModel : NSObject
 
+/**
+ 视频路径URL
+ */
+@property (nonatomic, strong) NSURL    *videoURL;
+
 @end
 
 NS_ASSUME_NONNULL_END
