@@ -1,0 +1,6 @@
+framework module ZZPlayer {
+  umbrella header "ZZPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}
