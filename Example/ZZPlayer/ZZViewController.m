@@ -7,23 +7,28 @@
 //
 
 #import "ZZViewController.h"
+#import "ZZPlayer/ZZPlayerLoadingView.h"
 
 @interface ZZViewController ()
-
+@property(nonatomic,weak)ZZPlayerLoadingView * playLoadingView;
 @end
 
 @implementation ZZViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    ZZPlayerLoadingView * lv = [[ZZPlayerLoadingView alloc]initWithFrame:CGRectMake(10, 100, 40, 40)];
+    lv.hiddenWhenStopped = YES;
+    lv.duration = 0.5;
+    lv.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:lv];
+    [lv startAnimating];
+    self.playLoadingView = lv;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.playLoadingView stopAnimating];
 }
 
 @end
