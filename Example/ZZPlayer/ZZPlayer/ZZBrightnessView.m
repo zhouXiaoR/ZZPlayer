@@ -9,7 +9,17 @@
 #import "ZZBrightnessView.h"
 #import "UIView+ZZFrame.h"
 
-@interface ZZBrightnessView ()<UICollectionViewDataSource>
+static NSString * const kBrightCellIdentifier = @"kBrightCellIdentifier";
+static CGFloat const kBrightnessMaxProgressValue = 12.0f;
+static CGFloat const kBrightnessSperateSpace = 1.5f;
+static CGFloat const kBrightnessCovMargin = 15.0f;
+static CGFloat const kBrightnessCovHeight = 5.0f;
+static CGFloat const kBrightnessCovEdgeMargin = 1.0f;
+
+
+@interface ZZBrightnessView ()<UICollectionViewDataSource>{
+    NSInteger _currentBrightnessValue;
+}
 
 @property(nonatomic,weak)UIView * contentView;
 @property(nonatomic,weak)UILabel * lightLab;
@@ -24,6 +34,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
+        _currentBrightnessValue = [UIScreen mainScreen].brightness * kBrightnessMaxProgressValue;
         [self setUp];
     }
     return self;
@@ -44,7 +55,7 @@
     self.sunImgView.bounds = CGRectMake(0, 0, 79, 76);
     self.sunImgView.center =
     CGPointMake(self.contentView.width * 0.5, self.contentView.height * 0.5);
-    self.lightProgressCollectionView.frame = CGRectMake(15, 130, self.width - 30, 10);
+    self.lightProgressCollectionView.frame = CGRectMake(kBrightnessCovMargin, 130, self.width - 2 * kBrightnessCovMargin, kBrightnessCovHeight);
 }
 
 #pragma mark - Public
@@ -57,13 +68,29 @@
 
 
 - (void)reloadBrightnessProgress{
+    _currentBrightnessValue = self.brightnessValue * kBrightnessMaxProgressValue;
 
+    if (_currentBrightnessValue > kBrightnessMaxProgressValue) {
+        _currentBrightnessValue = kBrightnessMaxProgressValue;
+    }
+
+    if (_currentBrightnessValue < 0) {
+        _currentBrightnessValue = 0;
+    }
+
+    [self.lightProgressCollectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBrightCellIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = indexPath.item < _currentBrightnessValue ? [UIColor whiteColor] : [UIColor clearColor];
+    return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return kBrightnessMaxProgressValue;
 }
 
 #pragma mark - getter
@@ -106,12 +133,33 @@
 - (UICollectionView *)lightProgressCollectionView{
     if (_lightProgressCollectionView == nil) {
         UICollectionView * cov = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:self.lightLayout];
+        cov.showsVerticalScrollIndicator = NO;
+        cov.showsHorizontalScrollIndicator = NO;
+        cov.userInteractionEnabled = NO;
         cov.backgroundColor = [UIColor colorWithRed:65.0/255.0 green:67.0/255.0 blue:70.0/255.0 alpha:1.0];
         cov.dataSource = self;
+        [cov registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBrightCellIdentifier];
         [self.contentView addSubview:cov];
         _lightProgressCollectionView = cov;
     }
     return _lightProgressCollectionView;
+}
+
+- (UICollectionViewFlowLayout *)lightLayout{
+    if (_lightLayout == nil) {
+        _lightLayout = [[UICollectionViewFlowLayout alloc]init];
+        _lightLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        CGFloat gh = kBrightnessCovHeight - 2 * kBrightnessCovEdgeMargin;
+        _lightLayout.itemSize = CGSizeMake(self.itemWidth,gh);
+        _lightLayout.minimumLineSpacing = kBrightnessSperateSpace;
+        _lightLayout.minimumInteritemSpacing = 0;
+        _lightLayout.sectionInset = UIEdgeInsetsMake(kBrightnessCovEdgeMargin,kBrightnessCovEdgeMargin,kBrightnessCovEdgeMargin,kBrightnessCovEdgeMargin);
+    }
+    return _lightLayout;
+}
+
+- (CGFloat)itemWidth{
+    return  (self.width - 2 * kBrightnessCovMargin - 2 * kBrightnessCovEdgeMargin - (kBrightnessMaxProgressValue - 1) * kBrightnessSperateSpace) * 1.0 / kBrightnessMaxProgressValue;
 }
 
 @end
