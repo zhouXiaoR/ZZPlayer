@@ -16,6 +16,9 @@ static CGFloat const kBrightnessCovMargin = 15.0f;
 static CGFloat const kBrightnessCovHeight = 5.0f;
 static CGFloat const kBrightnessCovEdgeMargin = 1.0f;
 
+static CGFloat const kBrightnessFadeAnimationDuration = 0.20f;
+static CGFloat const kBrightnessDelayDismissAnimationDuration = 1.5f;
+
 
 @interface ZZBrightnessView ()<UICollectionViewDataSource>{
     NSInteger _currentBrightnessValue;
@@ -64,8 +67,11 @@ static CGFloat const kBrightnessCovEdgeMargin = 1.0f;
     _brightnessValue = brightnessValue;
 
     [self reloadBrightnessProgress];
+
+    [UIScreen mainScreen].brightness = brightnessValue;
 }
 
+#pragma mark - Private
 
 - (void)reloadBrightnessProgress{
     _currentBrightnessValue = self.brightnessValue * kBrightnessMaxProgressValue;
@@ -74,11 +80,33 @@ static CGFloat const kBrightnessCovEdgeMargin = 1.0f;
         _currentBrightnessValue = kBrightnessMaxProgressValue;
     }
 
-    if (_currentBrightnessValue < 0) {
-        _currentBrightnessValue = 0;
+    if (_currentBrightnessValue < 1) {
+        _currentBrightnessValue = 1;
     }
 
+    [self animationFadeShow];
+
     [self.lightProgressCollectionView reloadData];
+
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self performSelector:@selector(animationFadeHidden) withObject:nil afterDelay:kBrightnessDelayDismissAnimationDuration];
+}
+
+- (void)animationFadeHidden{
+    [UIView animateWithDuration:kBrightnessFadeAnimationDuration animations:^{
+        self.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        self.hidden = YES;
+    }];
+}
+
+- (void)animationFadeShow{
+    if (self.hidden) {
+        self.hidden = NO;
+        [UIView animateWithDuration:kBrightnessFadeAnimationDuration animations:^{
+            self.alpha = 1.0f;
+        }];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
