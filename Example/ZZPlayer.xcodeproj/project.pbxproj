@@ -65,6 +65,7 @@
 		6939E61821A6ADD900E57989 /* play_new_brightness_night@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6939E5F621A6ADD800E57989 /* play_new_brightness_night@2x.png */; };
 		6939E61B21A6B11C00E57989 /* ZZBrightnessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6939E61A21A6B11C00E57989 /* ZZBrightnessView.m */; };
 		6939E61E21A6B55500E57989 /* UIView+ZZFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6939E61D21A6B55500E57989 /* UIView+ZZFrame.m */; };
+		6939E62C21AB914300E57989 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6939E62B21AB914300E57989 /* 1.jpg */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		AD33FBF9585DCBD4E5716526 /* Pods_ZZPlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFE126973D06C8AF1D3BBC2 /* Pods_ZZPlayer_Tests.framework */; };
@@ -159,6 +160,7 @@
 		6939E61C21A6B55500E57989 /* UIView+ZZFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ZZFrame.h"; sourceTree = "<group>"; };
 		6939E61D21A6B55500E57989 /* UIView+ZZFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZZFrame.m"; sourceTree = "<group>"; };
 		6939E61F21A6B5B400E57989 /* ZZPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZPlayer.h; sourceTree = "<group>"; };
+		6939E62B21AB914300E57989 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8455EDCE542AA8E0C93F3DDB /* Pods-ZZPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZZPlayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZZPlayer_Tests/Pods-ZZPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				6003F5A5195388D20070C39A /* ZZViewController.h */,
 				6003F5A6195388D20070C39A /* ZZViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
+				6939E62B21AB914300E57989 /* 1.jpg */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -489,6 +492,7 @@
 				6939E61221A6ADD900E57989 /* bottom_shadow.png in Resources */,
 				6939E60321A6ADD900E57989 /* fullscreen@2x.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				6939E62C21AB914300E57989 /* 1.jpg in Resources */,
 				6939E60A21A6ADD900E57989 /* dot@3x.png in Resources */,
 				6939E61321A6ADD900E57989 /* player_icon_nav_back@2x.png in Resources */,
 				6939E5FF21A6ADD900E57989 /* player_ctrl_icon_play@2x.png in Resources */,

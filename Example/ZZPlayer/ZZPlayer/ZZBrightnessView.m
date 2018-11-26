@@ -1,5 +1,5 @@
 //
-//  ZZBrightnessView.m
+//  ZZBrightVolumeView.m
 //  ZZPlayer_Example
 //
 //  Created by 周晓瑞 on 2018/11/22.
