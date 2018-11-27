@@ -40,9 +40,13 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     ZZVideoModel * vm = [[ZZVideoModel alloc]init];
-    NSString * path = [[NSBundle mainBundle] pathForResource:@"story.mp4" ofType:@""];
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"story.mp4" ofType:nil];
     vm.videoURL = [NSURL fileURLWithPath:path];
-    [self.playerView zzPlayWithVideoModel:vm];
+    [self.playerView playVideo:vm];
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
 }
 
 
