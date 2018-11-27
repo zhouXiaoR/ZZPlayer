@@ -73,10 +73,11 @@
     pv.backgroundColor = [UIColor grayColor];
     [self.view addSubview:pv];
     self.playerView = pv;
-
+// https://media.w3.org/2010/05/sintel/trailer.mp4
     ZZVideoModel * vm = [[ZZVideoModel alloc]init];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"story.mp4" ofType:nil];
     vm.videoURL = [NSURL fileURLWithPath:path];
+    vm.videoURL = [NSURL URLWithString:@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"];
     self.vmodel = vm;
 }
 
