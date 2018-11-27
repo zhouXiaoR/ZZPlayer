@@ -41,6 +41,9 @@
                                         <rect key="frame" x="10" y="166" width="85" height="30"/>
                                         <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="播放速度:1.0"/>
+                                        <connections>
+                                            <action selector="rateClick:" destination="whP-gf-Uak" eventType="touchUpInside" id="Bz3-en-oBH"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bya-1I-vAf">
                                         <rect key="frame" x="305" y="10" width="60" height="60"/>
@@ -50,6 +53,10 @@
                                             <constraint firstAttribute="height" constant="60" id="qMt-XK-TKg"/>
                                         </constraints>
                                         <state key="normal" title="播放"/>
+                                        <state key="selected" title="暂停"/>
+                                        <connections>
+                                            <action selector="playOrPause:" destination="whP-gf-Uak" eventType="touchUpInside" id="NBT-7y-ni0"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4a-uC-qps">
                                         <rect key="frame" x="22" y="106" width="112" height="30"/>
@@ -57,23 +64,32 @@
                                             <constraint firstAttribute="width" constant="112" id="AJJ-At-Lx4"/>
                                         </constraints>
                                     </button>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zie-hD-Osk">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zie-hD-Osk">
                                         <rect key="frame" x="8" y="90" width="359" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="hFm-0H-s7d"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="fastBack:" destination="whP-gf-Uak" eventType="valueChanged" id="cea-kG-1Lv"/>
+                                        </connections>
                                     </slider>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lxO-sg-Paj">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lxO-sg-Paj">
                                         <rect key="frame" x="48" y="206" width="319" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="kLq-Ko-xlB"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="brightnessSlide:" destination="whP-gf-Uak" eventType="valueChanged" id="rHA-YH-GXw"/>
+                                        </connections>
                                     </slider>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="N64-lf-Ypw">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="N64-lf-Ypw">
                                         <rect key="frame" x="48" y="245" width="319" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="gxx-Tb-l6X"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="volumnSlide:" destination="whP-gf-Uak" eventType="valueChanged" id="FbU-bz-6EX"/>
+                                        </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亮度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVv-uC-6qE">
                                         <rect key="frame" x="10" y="206" width="35" height="21"/>
@@ -124,6 +140,9 @@
                             <constraint firstItem="FE2-K7-a5Z" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="ofK-lC-DW1"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="timeLabBtn" destination="Ma6-zK-550" id="Hyj-wa-w4s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

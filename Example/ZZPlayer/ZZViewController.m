@@ -22,9 +22,46 @@
 @property(nonatomic,strong)UISlider * volumeSlider;
 @property(nonatomic,weak)ZZPlayerView * playerView;
 
+
+
+@property (weak, nonatomic) IBOutlet UIButton *timeLabBtn;
+@property(nonatomic,strong)ZZVideoModel * vmodel;
+
+
+
 @end
 
 @implementation ZZViewController
+
+- (IBAction)playOrPause:(id)sender {
+    UIButton * s = sender;
+    s.selected = !s.selected;
+
+    if (s.selected) {
+        [self.playerView playVideo:self.vmodel];
+    }else{
+        [[ZZPlayer shareInstance] zzPause];
+    }
+}
+
+- (IBAction)fastBack:(id)sender {
+     UISlider * s = sender;
+    [[ZZPlayer shareInstance] seekTimeProgress:s.value];
+}
+
+- (IBAction)rateClick:(id)sender {
+    UIButton * s = sender;
+    [ZZPlayer shareInstance].rate = 2;
+}
+
+- (IBAction)brightnessSlide:(id)sender {
+    UISlider * s = sender;
+    [ZZPlayer shareInstance].brightness = s.value;
+}
+
+- (IBAction)volumnSlide:(UISlider *)sender {
+    [ZZPlayer shareInstance].volume = sender.value * 10;
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -36,18 +73,22 @@
     pv.backgroundColor = [UIColor grayColor];
     [self.view addSubview:pv];
     self.playerView = pv;
-}
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     ZZVideoModel * vm = [[ZZVideoModel alloc]init];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"story.mp4" ofType:nil];
     vm.videoURL = [NSURL fileURLWithPath:path];
-    [self.playerView playVideo:vm];
+    self.vmodel = vm;
 }
 
-- (void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+
 }
+
+
+#pragma mark - 事件
+
+
+
 
 
 

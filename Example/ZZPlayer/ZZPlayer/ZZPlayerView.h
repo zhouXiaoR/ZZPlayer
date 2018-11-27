@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZZPlayer.h"
 #import "ZZVideoModel.h"
 
 

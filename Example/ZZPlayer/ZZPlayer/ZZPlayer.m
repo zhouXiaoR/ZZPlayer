@@ -44,6 +44,11 @@
 }
 
 - (void)zzInitialize{
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [audioSession setActive:YES error:nil];
+     [UIApplication sharedApplication].idleTimerDisabled=YES;
+
      // 打断播放
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zzPlayInterrupt) name:AVPlayerItemPlaybackStalledNotification object:nil];
 
@@ -76,7 +81,7 @@
 - (void)playWithURL:(NSURL *)URL{
     if (!URL || ![URL isKindOfClass:[NSURL class]] || URL.absoluteString.length <= 0) return;
 
-    if ([URL isEqual:self.currentURL]) {
+    if ([URL.absoluteString isEqualToString:self.currentURL.absoluteString]) {
         if (self.playerState == ZZPlayerStateBuffering) return;
         if (self.playerState == ZZPlayerStatePlaying) return;
         if (self.playerState == ZZPlayerStatePaused) {
@@ -96,6 +101,8 @@
     [self addPlayerItemObserve:playerItem];
 
     [self resetCurrentItemPlayState];
+
+    [self zzResume];
 }
 
 - (void)resetCurrentItemPlayState{
@@ -105,7 +112,6 @@
     self.bufferingProgress = 0;
     self.playTimeObserver = nil;
     self.isUserManualSuspend = NO;
-    self.currentURL = nil;
 }
 
 #pragma mark - KVO

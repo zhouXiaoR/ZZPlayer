@@ -6,7 +6,6 @@
 //
 
 #import "ZZPlayerView.h"
-#import "ZZPlayer.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface ZZPlayerView ()
@@ -39,7 +38,6 @@
     [[ZZPlayer shareInstance] playWithURL:model.videoURL];
     AVPlayer * p = [ZZPlayer shareInstance].player;
     self.playerLayer.player = p;
-    [[ZZPlayer shareInstance]zzResume];
 }
 
 
