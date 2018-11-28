@@ -8,6 +8,8 @@
 
 #import "ZZPlayer.h"
 
+static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
+
 @interface ZZPlayer ()
 @property(nonatomic,assign)BOOL isUserManualSuspend;
 
@@ -65,7 +67,7 @@
 }
 
 - (void)zzPlayToEnded{
-    self.playerState = ZZPlayerStateStopped;
+    self.playerState = ZZPlayerStateFinished;
 }
 
 - (void)appDidEnterBackground{
@@ -117,13 +119,14 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+
+    if (context != kPlayManagerObserveContext) return;
+
     if ([keyPath isEqualToString:@"status"]) {
         AVPlayerItemStatus status = [change[NSKeyValueChangeNewKey] integerValue];
         if (status == AVPlayerItemStatusReadyToPlay) {
-
             CGFloat time = CMTimeGetSeconds(self.player.currentItem.duration);
             self.totalDuration = MAX(time, 0);
-
             [self zzResume];
         }else if (status == AVPlayerItemStatusFailed){
             self.playerState = ZZPlayerStateFailed;
@@ -144,10 +147,14 @@
     }
 
     if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
-
         // 计算缓冲进度
         NSTimeInterval timeInterval = [self availableBufferingDuration];
         self.bufferingProgress = timeInterval * 1.0 / self.totalDuration;
+        if (self.playBufferingProgressComplete) {
+            if (!isinf(self.bufferingProgress)) {
+                self.playBufferingProgressComplete(self.bufferingProgress);
+            }
+        }
     }
 }
 
@@ -176,14 +183,21 @@
 }
 
 - (void)addPlayerItemObserve:(AVPlayerItem *)item{
-    [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
-    [item addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
-    [item addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:kPlayManagerObserveContext];
+    [item addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:kPlayManagerObserveContext];
+    [item addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:kPlayManagerObserveContext];
 
     __weak typeof(self) weakSelf = self;
    self.playTimeObserver = [_player addPeriodicTimeObserverForInterval:CMTimeMake(1.0, NSEC_PER_SEC) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         AVPlayerItem * item = weakSelf.player.currentItem;
         weakSelf.currentDuration = item.currentTime.value / item.currentTime.timescale;
+       if (weakSelf.playingProgressComplete) {
+           CGFloat bf = weakSelf.currentDuration * 1.0 / self.totalDuration;
+           if (isnan(bf)) {
+               bf = 0.0f;
+           }
+           weakSelf.playingProgressComplete(bf);
+       }
     }];
 }
 
@@ -199,7 +213,7 @@
     [self.player pause];
     [self removePlayerItemObserve:self.player.currentItem];
     self.player = nil;
-    self.playerState = ZZPlayerStateStopped;
+    self.playerState = ZZPlayerStateUnknown;
     self.isUserManualSuspend = NO;
 }
 
@@ -223,6 +237,22 @@
     [self.player seekToTime:time completionHandler:^(BOOL finished) {
         NSLog(@"快进快退完成");
     }];
+}
+
+- (void)setPlayerState:(ZZPlayerState)playerState{
+    if (_playerState == playerState) return;
+
+    _playerState = playerState;
+
+    if (self.playStateChangeCompelete) {
+        self.playStateChangeCompelete(playerState);
+    }
+
+    if (playerState == ZZPlayerStateFinished) {
+        if (self.playFinishedComplete) {
+            self.playFinishedComplete(nil);
+        }
+    }
 }
 
 - (void)setVolume:(CGFloat)volume{

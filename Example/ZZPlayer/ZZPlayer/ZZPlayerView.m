@@ -10,10 +10,10 @@
 
 @interface ZZPlayerView ()
 @property(nonatomic,weak)AVPlayerLayer * playerLayer;
+@property(nonatomic,strong)ZZPlayer * playerManager;
 @end
 
 @implementation ZZPlayerView
-
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -28,16 +28,14 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-
     self.playerLayer.frame = self.bounds;
 }
 
 #pragma mark - Public
 
 - (void)playVideo:(ZZVideoModel *)model{
-    [[ZZPlayer shareInstance] playWithURL:model.videoURL];
-    AVPlayer * p = [ZZPlayer shareInstance].player;
-    self.playerLayer.player = p;
+    [self.playerManager playWithURL:model.videoURL];
+    self.playerLayer.player = self.playerManager.player;
 }
 
 
@@ -53,5 +51,8 @@
     return _playerLayer;
 }
 
+- (ZZPlayer *)playerManager{
+    return [ZZPlayer shareInstance];
+}
 
 @end

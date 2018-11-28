@@ -27,7 +27,20 @@
 @property (weak, nonatomic) IBOutlet UIButton *timeLabBtn;
 @property(nonatomic,strong)ZZVideoModel * vmodel;
 
+// 播放暂停按钮
+@property (weak, nonatomic) IBOutlet UIButton *playPauseBtn;
 
+// 进度滑块
+@property (weak, nonatomic) IBOutlet UISlider *progressSlider;
+
+// 亮度滑块
+@property (weak, nonatomic) IBOutlet UISlider *brightnessSlider;
+
+// 声音滑块
+@property (weak, nonatomic) IBOutlet UISlider *volumnsSlide;
+
+// 播放速度
+@property (weak, nonatomic) IBOutlet UIButton *rateBtn;
 
 @end
 
@@ -38,30 +51,65 @@
     s.selected = !s.selected;
 
     if (s.selected) {
+        if (![[self.playPauseBtn titleForState:UIControlStateNormal] isEqualToString:@"播放"]) {
+            [self.playPauseBtn setTitle:@"播放" forState:UIControlStateNormal];
+        }
         [self.playerView playVideo:self.vmodel];
     }else{
-        [[ZZPlayer shareInstance] zzPause];
+        [self.playerView.playerManager zzPause];
     }
 }
 
 - (IBAction)fastBack:(id)sender {
      UISlider * s = sender;
-    [[ZZPlayer shareInstance] seekTimeProgress:s.value];
+    [self.playerView.playerManager seekTimeProgress:s.value];
 }
 
 - (IBAction)rateClick:(id)sender {
-    UIButton * s = sender;
-    [ZZPlayer shareInstance].rate = 2;
+    self.playerView.playerManager.rate = 2;
 }
 
 - (IBAction)brightnessSlide:(id)sender {
     UISlider * s = sender;
-    [ZZPlayer shareInstance].brightness = s.value;
+    self.playerView.playerManager.brightness = s.value;
 }
 
 - (IBAction)volumnSlide:(UISlider *)sender {
-    [ZZPlayer shareInstance].volume = sender.value * 10;
+    self.playerView.playerManager.volume = sender.value * 10;
 }
+
+- (void)bindData{
+
+    self.brightnessSlider.value = [UIScreen mainScreen].brightness;
+    self.volumnsSlide.value = self.playerView.playerManager.volume;
+    [self.timeLabBtn setTitle:@"00:00/00:00" forState:UIControlStateNormal];
+    [self.rateBtn setTitle:@"播放速度1.0" forState:UIControlStateNormal];
+
+
+    [self.playerView.playerManager setPlayingProgressComplete:^(CGFloat progress) {
+        NSLog(@"当前的播放进度----%.2f",progress);
+        NSString * cd = [self  getMMSSFromSS:self.playerView.playerManager.currentDuration];
+         NSString * tol = [self  getMMSSFromSS:self.playerView.playerManager.totalDuration];
+        NSString * timeLabText = [NSString stringWithFormat:@"%@/%@",cd,tol];
+        [self.timeLabBtn setTitle:timeLabText forState:UIControlStateNormal];
+    }];
+
+    [self.playerView.playerManager setPlayStateChangeCompelete:^(ZZPlayerState state) {
+        NSLog(@"当前的播放状态----%lu",(unsigned long)state);
+    }];
+
+    [self.playerView.playerManager setPlayBufferingProgressComplete:^(CGFloat bufferProgress) {
+        NSLog(@"当前的缓冲进度----%.2f",bufferProgress);
+    }];
+
+    __weak typeof(self) weakSelf = self;
+    [self.playerView.playerManager setPlayFinishedComplete:^(id obj) {
+        NSLog(@"播放完成了---重置按钮");
+        weakSelf.playPauseBtn.selected = NO;
+        [weakSelf.playPauseBtn setTitle:@"重播" forState:UIControlStateNormal];
+    }];
+}
+
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -77,8 +125,15 @@
     ZZVideoModel * vm = [[ZZVideoModel alloc]init];
     NSString * path = [[NSBundle mainBundle] pathForResource:@"story.mp4" ofType:nil];
     vm.videoURL = [NSURL fileURLWithPath:path];
-    vm.videoURL = [NSURL URLWithString:@"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"];
+    vm.videoURL = [NSURL URLWithString:@"http://v4.qutoutiao.net/toutiao_video_zdgq_online/d0287ebf4ae741dfb403ef1f0217fc86/hd.mp4"];
+
+    // http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4 动画片1分钟
+    // http://v4.qutoutiao.net/toutiao_video_zdgq_online/87c3a57b674941c3935515611392c9a2/hd.mp4
+    // http://v4.qutoutiao.net/toutiao_video_zdgq_online/9c1303634abb4321b5df4db3cb6c148c/hd.mp4
+//天路 http://v4.qutoutiao.net/toutiao_video_zdgq_online/d0287ebf4ae741dfb403ef1f0217fc86/hd.mp4
     self.vmodel = vm;
+
+    [self bindData];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -151,6 +206,21 @@
         }
     }
     return volumeSlider;
+}
+
+- (NSString *)getMMSSFromSS:(NSInteger)totalTime{
+    NSInteger seconds = totalTime;
+    NSString *str_hour = [NSString stringWithFormat:@"%02ld",seconds/3600];
+    NSString *str_minute = [NSString stringWithFormat:@"%02ld",(seconds%3600)/60];
+    NSString *str_second = [NSString stringWithFormat:@"%02ld",seconds%60];
+
+     NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
+    if (str_hour.integerValue <= 0) {
+          format_time =
+        [NSString stringWithFormat:@"%@:%@",str_minute,str_second];
+    }
+
+    return format_time;
 }
 
 @end

@@ -10,14 +10,18 @@
 #import <AVFoundation/AVFoundation.h>
 
 typedef  NS_ENUM(NSUInteger,ZZPlayerState){
-     ZZPlayerStateUnknown = 0, // 未知状态
+     ZZPlayerStateUnknown = 0, // 未知状态，默认状态
      ZZPlayerStateBuffering = 1, // 缓冲中
      ZZPlayerStatePlaying = 2, // 播放中
-     ZZPlayerStateStopped = 3, // 停止
+     ZZPlayerStateFinished = 3, // 播放完成
      ZZPlayerStatePaused = 4,  // 暂停
      ZZPlayerStateFailed = 5, // 失败
 };
 
+typedef void(^ZZPlayerMPlayStateChangeComplete)(ZZPlayerState state);
+typedef void(^ZZPlayerMPlayingProgressComplete)(CGFloat progress);
+typedef void(^ZZPlayerMPlayBufferingProgressComplete)(CGFloat bufferProgress);
+typedef void(^ZZPlayerMPlayFinishedComplete)(id obj);
 
 @interface ZZPlayer : NSObject
 
@@ -38,6 +42,27 @@ typedef  NS_ENUM(NSUInteger,ZZPlayerState){
 @property(nonatomic,assign)CGFloat rate;
 @property(nonatomic,assign)BOOL mute;
 
+
+/**
+  播放状态回调
+ */
+@property(nonatomic,copy)ZZPlayerMPlayStateChangeComplete playStateChangeCompelete;
+
+/**
+  播放进度回调
+ */
+@property(nonatomic,copy)ZZPlayerMPlayingProgressComplete playingProgressComplete;
+
+/**
+  缓冲进度回调
+ */
+@property(nonatomic,copy)ZZPlayerMPlayBufferingProgressComplete playBufferingProgressComplete;
+
+/**
+ 播放完成
+ */
+@property(nonatomic,copy)ZZPlayerMPlayFinishedComplete  playFinishedComplete;
+
 /**
  播放
 
@@ -52,10 +77,19 @@ typedef  NS_ENUM(NSUInteger,ZZPlayerState){
  */
 - (void)seekTimeProgress:(CGFloat)progress;
 
+/**
+ 继续
+ */
 - (void)zzResume;
 
+/**
+ 停止，清空player
+ */
 - (void)zzStop;
 
+/**
+ 暂停
+ */
 - (void)zzPause;
 
 @end

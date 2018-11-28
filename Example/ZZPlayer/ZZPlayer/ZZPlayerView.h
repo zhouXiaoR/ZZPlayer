@@ -15,7 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ZZPlayerView : UIView
 
+
+@property(nonatomic,strong,readonly)ZZPlayer * playerManager;
+
 - (void)playVideo:(ZZVideoModel *)model;
+
+
+
 
 @end
 

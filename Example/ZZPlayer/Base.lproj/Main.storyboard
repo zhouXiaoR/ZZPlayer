@@ -28,17 +28,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FE2-K7-a5Z">
                                 <rect key="frame" x="0.0" y="367" width="375" height="300"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ma6-zK-550">
-                                        <rect key="frame" x="10" y="10" width="112" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ma6-zK-550">
+                                        <rect key="frame" x="10" y="10" width="134" height="34"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="总时间/当前时间"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKx-ys-yMj">
-                                        <rect key="frame" x="10" y="50" width="62" height="30"/>
+                                        <rect key="frame" x="10" y="54" width="62" height="30"/>
                                         <state key="normal" title="快进快退"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YoY-Cc-ghX">
-                                        <rect key="frame" x="10" y="166" width="85" height="30"/>
+                                        <rect key="frame" x="10" y="170" width="85" height="30"/>
                                         <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="播放速度:1.0"/>
                                         <connections>
@@ -59,13 +59,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4a-uC-qps">
-                                        <rect key="frame" x="22" y="106" width="112" height="30"/>
+                                        <rect key="frame" x="22" y="110" width="112" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="112" id="AJJ-At-Lx4"/>
                                         </constraints>
                                     </button>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zie-hD-Osk">
-                                        <rect key="frame" x="8" y="90" width="359" height="31"/>
+                                        <rect key="frame" x="8" y="94" width="359" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="hFm-0H-s7d"/>
                                         </constraints>
@@ -74,7 +74,7 @@
                                         </connections>
                                     </slider>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lxO-sg-Paj">
-                                        <rect key="frame" x="48" y="206" width="319" height="30"/>
+                                        <rect key="frame" x="48" y="210" width="319" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="kLq-Ko-xlB"/>
                                         </constraints>
@@ -83,7 +83,7 @@
                                         </connections>
                                     </slider>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="N64-lf-Ypw">
-                                        <rect key="frame" x="48" y="245" width="319" height="30"/>
+                                        <rect key="frame" x="48" y="249" width="319" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="gxx-Tb-l6X"/>
                                         </constraints>
@@ -92,13 +92,13 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亮度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVv-uC-6qE">
-                                        <rect key="frame" x="10" y="206" width="35" height="21"/>
+                                        <rect key="frame" x="10" y="210" width="35" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="声音" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1YS-1e-2Ih">
-                                        <rect key="frame" x="10" y="237" width="35" height="21"/>
+                                        <rect key="frame" x="10" y="241" width="35" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -141,7 +141,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="brightnessSlider" destination="lxO-sg-Paj" id="mYF-NE-rKn"/>
+                        <outlet property="playPauseBtn" destination="bya-1I-vAf" id="34F-rg-4nm"/>
+                        <outlet property="progressSlider" destination="Zie-hD-Osk" id="CeV-gD-hz7"/>
+                        <outlet property="rateBtn" destination="YoY-Cc-ghX" id="Fm9-OS-2jH"/>
                         <outlet property="timeLabBtn" destination="Ma6-zK-550" id="Hyj-wa-w4s"/>
+                        <outlet property="volumnsSlide" destination="N64-lf-Ypw" id="DuD-PE-saZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
