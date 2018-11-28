@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)playVideo:(ZZVideoModel *)model;
 
-
+@property(nonatomic,assign,readonly)BOOL isFullScreen;
 
 
 @end

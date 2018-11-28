@@ -124,7 +124,7 @@
 
     ZZPlayerView * pv = [[ZZPlayerView alloc]initWithFrame:
                          CGRectMake(0, 64, self.view.width, self.view.height - 300 - 64)];
-    pv.backgroundColor = [UIColor grayColor];
+    pv.backgroundColor = [UIColor greenColor];
     [self.view addSubview:pv];
     self.playerView = pv;
 // https://media.w3.org/2010/05/sintel/trailer.mp4
@@ -141,38 +141,9 @@
 
     [self bindData];
 
-    //获取设备旋转方向的通知,即使关闭了自动旋转,一样可以监测到设备的旋转方向
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-
-    //旋转屏幕通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onDeviceOrientationChange:)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil
-     ];
+   
 }
 
-- (void)onDeviceOrientationChange:(NSNotification *)notify{
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
-    switch (interfaceOrientation) {
-        case UIInterfaceOrientationPortrait:{
-            NSLog(@"正常方向");
-        }
-            break;
-        case UIInterfaceOrientationLandscapeLeft:{
-            NSLog(@"home在左");
-
-        }
-            break;
-        case UIInterfaceOrientationLandscapeRight:{
-            NSLog(@"home在右");
-        }
-            break;
-        default:
-            break;
-    }
-}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     ZZVideoModel * vm = [[ZZVideoModel alloc]init];
@@ -192,14 +163,20 @@
     return UIInterfaceOrientationPortrait;
 }
 
+- (BOOL)prefersStatusBarHidden {
+    BOOL sbh = [UIScreen mainScreen].bounds.size.width > [UIScreen mainScreen].bounds.size.height;
+    [self.navigationController setNavigationBarHidden:sbh animated:YES];
+    return sbh;
+}
+
 
 #pragma mark - Private
 
 - (NSString *)getMMSSFromSS:(NSInteger)totalTime{
     NSInteger seconds = totalTime;
-    NSString *str_hour = [NSString stringWithFormat:@"%02d",seconds/3600];
-    NSString *str_minute = [NSString stringWithFormat:@"%02d",(seconds%3600)/60];
-    NSString *str_second = [NSString stringWithFormat:@"%02d",seconds%60];
+    NSString *str_hour = [NSString stringWithFormat:@"%02ld",seconds/3600];
+    NSString *str_minute = [NSString stringWithFormat:@"%02ld",(seconds%3600)/60];
+    NSString *str_second = [NSString stringWithFormat:@"%02ld",seconds%60];
 
     NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
     if (str_hour.integerValue <= 0) {
