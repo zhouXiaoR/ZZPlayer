@@ -27,7 +27,6 @@
 		6939E5C221A695A900E57989 /* ZZPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6939E5BC21A695A900E57989 /* ZZPlayerControlView.m */; };
 		6939E5CD21A69AF800E57989 /* ic_videodetails_loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6939E5CB21A69AF800E57989 /* ic_videodetails_loading@2x.png */; };
 		6939E5CE21A69AF800E57989 /* ic_videodetails_loading@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6939E5CC21A69AF800E57989 /* ic_videodetails_loading@3x.png */; };
-		6939E5D421A69F6B00E57989 /* UIViewController+ZZShouldAutorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6939E5D321A69F6B00E57989 /* UIViewController+ZZShouldAutorotate.m */; };
 		6939E5F721A6ADD900E57989 /* player_icon_unlock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6939E5D521A6ADD200E57989 /* player_icon_unlock@2x.png */; };
 		6939E5F821A6ADD900E57989 /* close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6939E5D621A6ADD200E57989 /* close@3x.png */; };
 		6939E5F921A6ADD900E57989 /* progress_icon_r@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6939E5D721A6ADD200E57989 /* progress_icon_r@2x.png */; };
@@ -67,6 +66,7 @@
 		6939E62C21AB914300E57989 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6939E62B21AB914300E57989 /* 1.jpg */; };
 		6939E63421ABD71000E57989 /* story.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6939E63321ABD71000E57989 /* story.mp4 */; };
 		698A563521AD19C500522C8C /* ZZPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A563421AD19C500522C8C /* ZZPlayer.m */; };
+		698A563921AE9B2B00522C8C /* UIViewController+ZZShouldAutorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6939E5D321A69F6B00E57989 /* UIViewController+ZZShouldAutorotate.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		AD33FBF9585DCBD4E5716526 /* Pods_ZZPlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFE126973D06C8AF1D3BBC2 /* Pods_ZZPlayer_Tests.framework */; };
@@ -578,11 +578,11 @@
 				6939E61E21A6B55500E57989 /* UIView+ZZFrame.m in Sources */,
 				6939E5BF21A695A900E57989 /* ZZVideoModel.m in Sources */,
 				6003F5A7195388D20070C39A /* ZZViewController.m in Sources */,
-				6939E5D421A69F6B00E57989 /* UIViewController+ZZShouldAutorotate.m in Sources */,
 				6939E5BE21A695A900E57989 /* ZZPlayerLoadingView.m in Sources */,
 				6939E5C221A695A900E57989 /* ZZPlayerControlView.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				6939E5C021A695A900E57989 /* ZZPlayerView.m in Sources */,
+				698A563921AE9B2B00522C8C /* UIViewController+ZZShouldAutorotate.m in Sources */,
 				698A563521AD19C500522C8C /* ZZPlayer.m in Sources */,
 				6939E61B21A6B11C00E57989 /* ZZBrightnessView.m in Sources */,
 			);

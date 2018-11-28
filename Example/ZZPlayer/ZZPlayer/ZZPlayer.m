@@ -53,7 +53,7 @@ static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     [audioSession setActive:YES error:nil];
-     [UIApplication sharedApplication].idleTimerDisabled=YES;
+    [UIApplication sharedApplication].idleTimerDisabled=YES;
 
      // 打断播放
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zzPlayInterrupt) name:AVPlayerItemPlaybackStalledNotification object:nil];

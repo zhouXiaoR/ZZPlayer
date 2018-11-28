@@ -123,7 +123,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     ZZPlayerView * pv = [[ZZPlayerView alloc]initWithFrame:
-                         CGRectMake(0, 0, self.view.width, self.view.height - 300)];
+                         CGRectMake(0, 64, self.view.width, self.view.height - 300 - 64)];
     pv.backgroundColor = [UIColor grayColor];
     [self.view addSubview:pv];
     self.playerView = pv;
@@ -140,16 +140,80 @@
     self.vmodel = vm;
 
     [self bindData];
+
+    //获取设备旋转方向的通知,即使关闭了自动旋转,一样可以监测到设备的旋转方向
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+
+    //旋转屏幕通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onDeviceOrientationChange:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil
+     ];
+}
+
+- (void)onDeviceOrientationChange:(NSNotification *)notify{
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    UIInterfaceOrientation interfaceOrientation = (UIInterfaceOrientation)orientation;
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:{
+            NSLog(@"正常方向");
+        }
+            break;
+        case UIInterfaceOrientationLandscapeLeft:{
+            NSLog(@"home在左");
+
+        }
+            break;
+        case UIInterfaceOrientationLandscapeRight:{
+            NSLog(@"home在右");
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    ZZVideoModel * vm = [[ZZVideoModel alloc]init];
+    vm.videoURL = [NSURL URLWithString:@"http://v4.qutoutiao.net/toutiao_video_zdgq_online/87c3a57b674941c3935515611392c9a2/hd.mp4"];
+    [self.playerView playVideo:vm];
+}
 
+- (BOOL)shouldAutorotate{
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationPortrait;
 }
 
 
-#pragma mark - 事件
+#pragma mark - Private
+
+- (NSString *)getMMSSFromSS:(NSInteger)totalTime{
+    NSInteger seconds = totalTime;
+    NSString *str_hour = [NSString stringWithFormat:@"%02d",seconds/3600];
+    NSString *str_minute = [NSString stringWithFormat:@"%02d",(seconds%3600)/60];
+    NSString *str_second = [NSString stringWithFormat:@"%02d",seconds%60];
+
+    NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
+    if (str_hour.integerValue <= 0) {
+        format_time =
+        [NSString stringWithFormat:@"%@:%@",str_minute,str_second];
+    }
+
+    return format_time;
+}
 
 
+
+#pragma mark - 测试代码
+#pragma mark - 测试代码
 
 - (void)demo{
     ZZBrightnessView * bv = [[ZZBrightnessView alloc]initWithFrame:CGRectMake(50, 100, 160, 160)];
@@ -209,21 +273,6 @@
         }
     }
     return volumeSlider;
-}
-
-- (NSString *)getMMSSFromSS:(NSInteger)totalTime{
-    NSInteger seconds = totalTime;
-    NSString *str_hour = [NSString stringWithFormat:@"%02ld",seconds/3600];
-    NSString *str_minute = [NSString stringWithFormat:@"%02ld",(seconds%3600)/60];
-    NSString *str_second = [NSString stringWithFormat:@"%02ld",seconds%60];
-
-     NSString *format_time = [NSString stringWithFormat:@"%@:%@:%@",str_hour,str_minute,str_second];
-    if (str_hour.integerValue <= 0) {
-          format_time =
-        [NSString stringWithFormat:@"%@:%@",str_minute,str_second];
-    }
-
-    return format_time;
 }
 
 @end
