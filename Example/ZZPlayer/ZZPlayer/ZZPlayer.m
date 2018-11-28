@@ -11,6 +11,10 @@
 static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
 
 @interface ZZPlayer ()
+
+/**
+ 用户主动暂停
+ */
 @property(nonatomic,assign)BOOL isUserManualSuspend;
 
 @property(nonatomic,assign)CGFloat totalDuration;
@@ -71,7 +75,7 @@ static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
 }
 
 - (void)appDidEnterBackground{
-    [self zzPause];
+    [self passivePause];
 }
 
 - (void)appWillEnterForeground{
@@ -127,7 +131,9 @@ static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
         if (status == AVPlayerItemStatusReadyToPlay) {
             CGFloat time = CMTimeGetSeconds(self.player.currentItem.duration);
             self.totalDuration = MAX(time, 0);
-            [self zzResume];
+            if (!self.isUserManualSuspend) {
+                [self zzResume];
+            }
         }else if (status == AVPlayerItemStatusFailed){
             self.playerState = ZZPlayerStateFailed;
         }else {
@@ -206,6 +212,13 @@ static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
     if (self.player && self.player.currentItem.playbackLikelyToKeepUp) {
         self.playerState = ZZPlayerStatePlaying;
         self.isUserManualSuspend = NO;
+    }
+}
+
+- (void)passivePause{
+    [self.player pause];
+    if (self.player) {
+        self.playerState = ZZPlayerStatePaused;
     }
 }
 

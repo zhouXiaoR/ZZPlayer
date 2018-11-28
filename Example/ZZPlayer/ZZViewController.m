@@ -17,15 +17,14 @@
 @interface ZZViewController ()
 @property(nonatomic,weak)ZZPlayerLoadingView * playLoadingView;
 @property(nonatomic,weak)ZZBrightnessView *brigV;
-
 @property(nonatomic,strong)MPVolumeView *volumeView;
 @property(nonatomic,strong)UISlider * volumeSlider;
+
+@property(nonatomic,strong)ZZVideoModel * vmodel;
 @property(nonatomic,weak)ZZPlayerView * playerView;
 
-
-
+// 时间比
 @property (weak, nonatomic) IBOutlet UIButton *timeLabBtn;
-@property(nonatomic,strong)ZZVideoModel * vmodel;
 
 // 播放暂停按钮
 @property (weak, nonatomic) IBOutlet UIButton *playPauseBtn;
@@ -39,8 +38,11 @@
 // 声音滑块
 @property (weak, nonatomic) IBOutlet UISlider *volumnsSlide;
 
+// 缓冲进度
+@property (weak, nonatomic) IBOutlet UIProgressView *bufferingProgressView;
+
 // 播放速度
-@property (weak, nonatomic) IBOutlet UIButton *rateBtn;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *rateSegment;
 
 @end
 
@@ -65,10 +67,6 @@
     [self.playerView.playerManager seekTimeProgress:s.value];
 }
 
-- (IBAction)rateClick:(id)sender {
-    self.playerView.playerManager.rate = 2;
-}
-
 - (IBAction)brightnessSlide:(id)sender {
     UISlider * s = sender;
     self.playerView.playerManager.brightness = s.value;
@@ -78,20 +76,28 @@
     self.playerView.playerManager.volume = sender.value * 10;
 }
 
+- (IBAction)segmentClick:(UISegmentedControl *)sender {
+    NSInteger index = sender.selectedSegmentIndex;
+    CGFloat rate = (1 + index) * 0.5;
+    self.playerView.playerManager.rate = rate;
+}
+
 - (void)bindData{
 
     self.brightnessSlider.value = [UIScreen mainScreen].brightness;
     self.volumnsSlide.value = self.playerView.playerManager.volume;
     [self.timeLabBtn setTitle:@"00:00/00:00" forState:UIControlStateNormal];
-    [self.rateBtn setTitle:@"播放速度1.0" forState:UIControlStateNormal];
+    self.rateSegment.selectedSegmentIndex = 1;
 
-
+    __weak typeof(self) weakSelf = self;
     [self.playerView.playerManager setPlayingProgressComplete:^(CGFloat progress) {
         NSLog(@"当前的播放进度----%.2f",progress);
-        NSString * cd = [self  getMMSSFromSS:self.playerView.playerManager.currentDuration];
-         NSString * tol = [self  getMMSSFromSS:self.playerView.playerManager.totalDuration];
+        NSString * cd = [self  getMMSSFromSS:weakSelf.playerView.playerManager.currentDuration];
+         NSString * tol = [self  getMMSSFromSS:weakSelf.playerView.playerManager.totalDuration];
         NSString * timeLabText = [NSString stringWithFormat:@"%@/%@",cd,tol];
-        [self.timeLabBtn setTitle:timeLabText forState:UIControlStateNormal];
+        [weakSelf.timeLabBtn setTitle:timeLabText forState:UIControlStateNormal];
+        [weakSelf.progressSlider setValue:progress animated:YES];
+        weakSelf.progressSlider.value = progress;
     }];
 
     [self.playerView.playerManager setPlayStateChangeCompelete:^(ZZPlayerState state) {
@@ -100,9 +106,9 @@
 
     [self.playerView.playerManager setPlayBufferingProgressComplete:^(CGFloat bufferProgress) {
         NSLog(@"当前的缓冲进度----%.2f",bufferProgress);
+        [weakSelf.bufferingProgressView setProgress:bufferProgress animated:YES];
     }];
 
-    __weak typeof(self) weakSelf = self;
     [self.playerView.playerManager setPlayFinishedComplete:^(id obj) {
         NSLog(@"播放完成了---重置按钮");
         weakSelf.playPauseBtn.selected = NO;
@@ -114,10 +120,10 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor whiteColor];
 
     ZZPlayerView * pv = [[ZZPlayerView alloc]initWithFrame:
-                         CGRectMake(0, 64, self.view.width, 300)];
+                         CGRectMake(0, 0, self.view.width, self.view.height - 300)];
     pv.backgroundColor = [UIColor grayColor];
     [self.view addSubview:pv];
     self.playerView = pv;
@@ -142,9 +148,6 @@
 
 
 #pragma mark - 事件
-
-
-
 
 
 
