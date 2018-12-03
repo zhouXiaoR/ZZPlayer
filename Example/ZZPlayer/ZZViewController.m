@@ -83,7 +83,6 @@
 }
 
 - (void)bindData{
-
     self.brightnessSlider.value = [UIScreen mainScreen].brightness;
     self.volumnsSlide.value = self.playerView.playerManager.volume;
     [self.timeLabBtn setTitle:@"00:00/00:00" forState:UIControlStateNormal];
@@ -116,6 +115,10 @@
     }];
 }
 
+- (IBAction)fullScreenClick:(id)sender {
+    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationLandscapeRight) forKey:@"orientation"];
+   [UIViewController attemptRotationToDeviceOrientation];
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -140,16 +143,15 @@
     self.vmodel = vm;
 
     [self bindData];
-
-   
 }
-
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     ZZVideoModel * vm = [[ZZVideoModel alloc]init];
     vm.videoURL = [NSURL URLWithString:@"http://v4.qutoutiao.net/toutiao_video_zdgq_online/87c3a57b674941c3935515611392c9a2/hd.mp4"];
     [self.playerView playVideo:vm];
 }
+
+#pragma mark - 旋转支持
 
 - (BOOL)shouldAutorotate{
     return YES;
@@ -168,7 +170,6 @@
     [self.navigationController setNavigationBarHidden:sbh animated:YES];
     return sbh;
 }
-
 
 #pragma mark - Private
 

@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) CGPoint origin;
 @property (nonatomic) CGSize  size;
+
 @end
 
 NS_ASSUME_NONNULL_END

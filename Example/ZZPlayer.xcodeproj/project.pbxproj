@@ -67,6 +67,8 @@
 		6939E63421ABD71000E57989 /* story.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6939E63321ABD71000E57989 /* story.mp4 */; };
 		698A563521AD19C500522C8C /* ZZPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A563421AD19C500522C8C /* ZZPlayer.m */; };
 		698A563921AE9B2B00522C8C /* UIViewController+ZZShouldAutorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6939E5D321A69F6B00E57989 /* UIViewController+ZZShouldAutorotate.m */; };
+		69C308C721B51E6400AD436B /* ZZBasePlayerLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C308C621B51E6400AD436B /* ZZBasePlayerLayoutView.m */; };
+		69C308CE21B5240500AD436B /* NSObject+ZZRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C308CD21B5240500AD436B /* NSObject+ZZRotation.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		AD33FBF9585DCBD4E5716526 /* Pods_ZZPlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFE126973D06C8AF1D3BBC2 /* Pods_ZZPlayer_Tests.framework */; };
@@ -162,6 +164,10 @@
 		6939E63321ABD71000E57989 /* story.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = story.mp4; sourceTree = "<group>"; };
 		698A563321AD19C500522C8C /* ZZPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZPlayer.h; sourceTree = "<group>"; };
 		698A563421AD19C500522C8C /* ZZPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZPlayer.m; sourceTree = "<group>"; };
+		69C308C521B51E6400AD436B /* ZZBasePlayerLayoutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZBasePlayerLayoutView.h; sourceTree = "<group>"; };
+		69C308C621B51E6400AD436B /* ZZBasePlayerLayoutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZBasePlayerLayoutView.m; sourceTree = "<group>"; };
+		69C308CC21B5240500AD436B /* NSObject+ZZRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZZRotation.h"; sourceTree = "<group>"; };
+		69C308CD21B5240500AD436B /* NSObject+ZZRotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZZRotation.m"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8455EDCE542AA8E0C93F3DDB /* Pods-ZZPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZZPlayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZZPlayer_Tests/Pods-ZZPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -302,6 +308,7 @@
 		6939E5B321A695A900E57989 /* ZZPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				69C308C821B51E6C00AD436B /* Base */,
 				6939E5D021A69ED600E57989 /* Category */,
 				6939E5CA21A69AF800E57989 /* ZZPlayerSource */,
 				6939E5B721A695A900E57989 /* ZZPlayerControlView.h */,
@@ -370,8 +377,19 @@
 				6939E5D321A69F6B00E57989 /* UIViewController+ZZShouldAutorotate.m */,
 				6939E61C21A6B55500E57989 /* UIView+ZZFrame.h */,
 				6939E61D21A6B55500E57989 /* UIView+ZZFrame.m */,
+				69C308CC21B5240500AD436B /* NSObject+ZZRotation.h */,
+				69C308CD21B5240500AD436B /* NSObject+ZZRotation.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		69C308C821B51E6C00AD436B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				69C308C521B51E6400AD436B /* ZZBasePlayerLayoutView.h */,
+				69C308C621B51E6400AD436B /* ZZBasePlayerLayoutView.m */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -578,7 +596,9 @@
 				6939E61E21A6B55500E57989 /* UIView+ZZFrame.m in Sources */,
 				6939E5BF21A695A900E57989 /* ZZVideoModel.m in Sources */,
 				6003F5A7195388D20070C39A /* ZZViewController.m in Sources */,
+				69C308C721B51E6400AD436B /* ZZBasePlayerLayoutView.m in Sources */,
 				6939E5BE21A695A900E57989 /* ZZPlayerLoadingView.m in Sources */,
+				69C308CE21B5240500AD436B /* NSObject+ZZRotation.m in Sources */,
 				6939E5C221A695A900E57989 /* ZZPlayerControlView.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				6939E5C021A695A900E57989 /* ZZPlayerView.m in Sources */,

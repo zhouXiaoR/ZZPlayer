@@ -8,6 +8,8 @@
 #import "ZZPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "Category/UIView+ZZFrame.h"
+#import "Category/NSObject+ZZRotation.h"
+#import "ZZPlayerControlView.h"
 
 #define ZZMScreeenWidth  [UIScreen mainScreen].bounds.size.width
 #define ZZMScreeenHeight  [UIScreen mainScreen].bounds.size.height
@@ -25,6 +27,8 @@
  是否已经完成了竖屏
  */
 @property(nonatomic,assign)BOOL isPortraitFinished;
+
+@property(nonatomic,weak)ZZPlayerControlView * playerControlView;
 
 
 @end
@@ -50,6 +54,32 @@
     }
     return self;
 }
+
+- (void)setUp{
+    [self playerLayer];
+    [self playerControlView];
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    self.playerLayer.frame = self.bounds;
+    self.playerControlView.frame = self.bounds;
+}
+
+#pragma mark - Public
+
+- (void)playVideo:(ZZVideoModel *)model{
+    [self.playerManager playWithURL:model.videoURL];
+    self.playerLayer.player = self.playerManager.player;
+}
+
+- (void)setIsFullScreen:(BOOL)isFullScreen{
+    _isFullScreen = isFullScreen;
+
+    self.playerControlView.fullScreen = isFullScreen;
+}
+
+#pragma mark - NSNotification
 
 - (void)deviceOrientationChangeNotification:(NSNotification *)notify{
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
@@ -107,6 +137,7 @@
     }
 }
 
+#pragma mark - Private
 
 -(void)portraitFinishaNextAction{
     UIDeviceOrientation  orient = [UIDevice currentDevice].orientation;
@@ -123,23 +154,6 @@
     }
 }
 
-- (void)setUp{
-    [self playerLayer];
-}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    self.playerLayer.frame = self.bounds;
-}
-
-#pragma mark - Public
-
-- (void)playVideo:(ZZVideoModel *)model{
-    [self.playerManager playWithURL:model.videoURL];
-    self.playerLayer.player = self.playerManager.player;
-}
-
-
 #pragma mark - getter
 
 - (AVPlayerLayer *)playerLayer{
@@ -154,6 +168,19 @@
 
 - (ZZPlayer *)playerManager{
     return [ZZPlayer shareInstance];
+}
+
+- (ZZPlayerControlView *)playerControlView{
+    if (_playerControlView == nil) {
+        ZZPlayerControlView * pcv = [[ZZPlayerControlView alloc]init];
+        pcv.fullScreen = NO;
+        [self addSubview:pcv];
+        [pcv setBackBlock:^(id obj) {
+            [UIDevice forceUpdateDeviceRotaion:UIInterfaceOrientationPortrait];
+        }];
+        _playerControlView = pcv;
+    }
+    return _playerControlView;
 }
 
 @end

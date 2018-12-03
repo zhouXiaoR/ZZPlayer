@@ -114,14 +114,28 @@
                                             <action selector="brightnessSlide:" destination="whP-gf-Uak" eventType="valueChanged" id="rHA-YH-GXw"/>
                                         </connections>
                                     </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVh-sn-RUc">
+                                        <rect key="frame" x="210" y="10" width="35" height="40"/>
+                                        <color key="backgroundColor" red="0.57380741830000004" green="0.56553578380000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="rMB-iE-7O7"/>
+                                        </constraints>
+                                        <state key="normal" title="全屏"/>
+                                        <connections>
+                                            <action selector="fullScreenClick:" destination="whP-gf-Uak" eventType="touchUpInside" id="P4b-aG-cLm"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Ma6-zK-550" firstAttribute="top" secondItem="FE2-K7-a5Z" secondAttribute="top" constant="10" id="04F-7X-akd"/>
+                                    <constraint firstItem="bVh-sn-RUc" firstAttribute="bottom" secondItem="bya-1I-vAf" secondAttribute="bottom" id="2ab-z0-pls"/>
                                     <constraint firstItem="hKq-II-gOl" firstAttribute="leading" secondItem="FE2-K7-a5Z" secondAttribute="leading" constant="10" id="5QB-AI-m1I"/>
                                     <constraint firstItem="N64-lf-Ypw" firstAttribute="width" secondItem="Zie-hD-Osk" secondAttribute="width" id="6fw-8L-U63"/>
+                                    <constraint firstItem="bVh-sn-RUc" firstAttribute="top" secondItem="bya-1I-vAf" secondAttribute="top" id="7yf-YL-8Qq"/>
                                     <constraint firstItem="N64-lf-Ypw" firstAttribute="centerY" secondItem="1YS-1e-2Ih" secondAttribute="centerY" id="Aaj-rM-rgk"/>
                                     <constraint firstItem="1YS-1e-2Ih" firstAttribute="leading" secondItem="FE2-K7-a5Z" secondAttribute="leading" constant="10" id="Abb-nm-Tdd"/>
+                                    <constraint firstItem="bya-1I-vAf" firstAttribute="leading" secondItem="bVh-sn-RUc" secondAttribute="trailing" constant="20" id="AmP-e5-3rd"/>
                                     <constraint firstAttribute="height" constant="300" id="D9X-qw-VqT"/>
                                     <constraint firstItem="lxO-sg-Paj" firstAttribute="centerY" secondItem="BVv-uC-6qE" secondAttribute="centerY" id="Fa9-aC-Ra6"/>
                                     <constraint firstItem="Qia-hT-Tko" firstAttribute="leading" secondItem="FE2-K7-a5Z" secondAttribute="leading" constant="10" id="G8r-Ex-hty"/>
