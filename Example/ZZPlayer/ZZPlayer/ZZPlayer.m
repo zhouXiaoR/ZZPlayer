@@ -162,6 +162,14 @@ static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
             }
         }
     }
+
+
+    if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
+        // 当缓冲为空时
+        if (self.player.currentItem.playbackBufferEmpty) {
+            [self zzLoadedTimeRanges];
+        }
+    }
 }
 
 
@@ -182,6 +190,7 @@ static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
     [item removeObserver:self forKeyPath:@"status"];
     [item removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
     [item removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [item removeObserver:self forKeyPath:@"playbackBufferEmpty"];
     [item cancelPendingSeeks];
     [item.asset cancelLoading];
     [self.player pause];
@@ -192,6 +201,7 @@ static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
     [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:kPlayManagerObserveContext];
     [item addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:kPlayManagerObserveContext];
     [item addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:kPlayManagerObserveContext];
+    [item addObserver:self forKeyPath:@"playbackBufferEmpty" options: NSKeyValueObservingOptionNew context:kPlayManagerObserveContext];
 
     __weak typeof(self) weakSelf = self;
    self.playTimeObserver = [_player addPeriodicTimeObserverForInterval:CMTimeMake(1.0, NSEC_PER_SEC) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
@@ -205,6 +215,20 @@ static void *kPlayManagerObserveContext = &kPlayManagerObserveContext;
            weakSelf.playingProgressComplete(bf);
        }
     }];
+}
+
+- (void)zzLoadedTimeRanges{
+    if (self.playerState == ZZPlayerStatePaused) return;
+
+    self.playerState = ZZPlayerStateBuffering;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.playerState == ZZPlayerStatePlaying || self.playerState == ZZPlayerStateFinished) {
+
+        }else{
+            [self zzResume];
+        }
+    });
 }
 
 - (void)zzResume{

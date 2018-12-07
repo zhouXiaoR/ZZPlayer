@@ -35,6 +35,9 @@
 // 亮度滑块
 @property (weak, nonatomic) IBOutlet UISlider *brightnessSlider;
 
+// 静音按钮
+@property (weak, nonatomic) IBOutlet UIButton *muteBtn;
+
 // 声音滑块
 @property (weak, nonatomic) IBOutlet UISlider *volumnsSlide;
 
@@ -47,6 +50,11 @@
 @end
 
 @implementation ZZViewController
+
+- (void)dealloc{
+    [self.playerView.playerManager zzStop];
+}
+
 
 - (IBAction)playOrPause:(id)sender {
     UIButton * s = sender;
@@ -67,6 +75,11 @@
     [self.playerView.playerManager seekTimeProgress:s.value];
 }
 
+- (IBAction)muteBtnClick:(UIButton *)sender {
+    self.playerView.playerManager.mute = !self.muteBtn.selected;
+    self.muteBtn.selected = !self.muteBtn.selected;
+}
+
 - (IBAction)brightnessSlide:(id)sender {
     UISlider * s = sender;
     self.playerView.playerManager.brightness = s.value;
@@ -83,16 +96,22 @@
 }
 
 - (void)bindData{
+
+    [self.muteBtn setTitle:@"静音" forState:UIControlStateNormal];
+    [self.muteBtn setTitle:@"非静音" forState:UIControlStateSelected];
+
     self.brightnessSlider.value = [UIScreen mainScreen].brightness;
     self.volumnsSlide.value = self.playerView.playerManager.volume;
+    self.muteBtn.selected = self.playerView.playerManager.mute;
+
     [self.timeLabBtn setTitle:@"00:00/00:00" forState:UIControlStateNormal];
     self.rateSegment.selectedSegmentIndex = 1;
 
     __weak typeof(self) weakSelf = self;
     [self.playerView.playerManager setPlayingProgressComplete:^(CGFloat progress) {
         NSLog(@"当前的播放进度----%.2f",progress);
-        NSString * cd = [self  getMMSSFromSS:weakSelf.playerView.playerManager.currentDuration];
-         NSString * tol = [self  getMMSSFromSS:weakSelf.playerView.playerManager.totalDuration];
+        NSString * cd = [weakSelf getMMSSFromSS:weakSelf.playerView.playerManager.currentDuration];
+         NSString * tol = [weakSelf getMMSSFromSS:weakSelf.playerView.playerManager.totalDuration];
         NSString * timeLabText = [NSString stringWithFormat:@"%@/%@",cd,tol];
         [weakSelf.timeLabBtn setTitle:timeLabText forState:UIControlStateNormal];
         [weakSelf.progressSlider setValue:progress animated:YES];
@@ -143,12 +162,13 @@
     self.vmodel = vm;
 
     [self bindData];
+
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     ZZVideoModel * vm = [[ZZVideoModel alloc]init];
     vm.videoURL = [NSURL URLWithString:@"http://v4.qutoutiao.net/toutiao_video_zdgq_online/87c3a57b674941c3935515611392c9a2/hd.mp4"];
-    [self.playerView playVideo:vm];
+  //  [self.playerView playVideo:vm];
 }
 
 #pragma mark - 旋转支持
