@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer *singleTap;
 @property (nonatomic, strong) UITapGestureRecognizer *doubleTap;
-@property (nonatomic, strong) UIPanGestureRecognizer *panGR;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic,assign) ZZControlViewPanDirection panDirection;
 @property (nonatomic,assign) ZZControlViewPanLocationType panLocationType;
 @property (nonatomic,assign) ZZControlViewMoveDirection panMovingDirection;
@@ -46,7 +46,7 @@
 
     [self addGestureRecognizer:self.singleTap];
     [self addGestureRecognizer:self.doubleTap];
-    [self addGestureRecognizer:self.panGR];
+    [self addGestureRecognizer:self.panGesture];
     [self.singleTap requireGestureRecognizerToFail:self.doubleTap];
 }
 
@@ -235,11 +235,11 @@
     return _doubleTap;
 }
 
-- (UIPanGestureRecognizer *)panGR {
-    if (!_panGR) {
-        _panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+- (UIPanGestureRecognizer *)panGesture {
+    if (!_panGesture) {
+        _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     }
-    return _panGR;
+    return _panGesture;
 }
 
 
