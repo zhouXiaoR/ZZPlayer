@@ -70,6 +70,7 @@
 		69C308C721B51E6400AD436B /* ZZBasePlayerLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C308C621B51E6400AD436B /* ZZBasePlayerLayoutView.m */; };
 		69C308CE21B5240500AD436B /* NSObject+ZZRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C308CD21B5240500AD436B /* NSObject+ZZRotation.m */; };
 		69C308D121B5276F00AD436B /* ZZDanMuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C308D021B5276F00AD436B /* ZZDanMuView.m */; };
+		69E943D221BA439000F32A08 /* ZZPlayControlVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E943D121BA439000F32A08 /* ZZPlayControlVC.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		AD33FBF9585DCBD4E5716526 /* Pods_ZZPlayer_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFE126973D06C8AF1D3BBC2 /* Pods_ZZPlayer_Tests.framework */; };
@@ -171,6 +172,8 @@
 		69C308CD21B5240500AD436B /* NSObject+ZZRotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZZRotation.m"; sourceTree = "<group>"; };
 		69C308CF21B5276F00AD436B /* ZZDanMuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZDanMuView.h; sourceTree = "<group>"; };
 		69C308D021B5276F00AD436B /* ZZDanMuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZDanMuView.m; sourceTree = "<group>"; };
+		69E943D021BA439000F32A08 /* ZZPlayControlVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZPlayControlVC.h; sourceTree = "<group>"; };
+		69E943D121BA439000F32A08 /* ZZPlayControlVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZPlayControlVC.m; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8455EDCE542AA8E0C93F3DDB /* Pods-ZZPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZZPlayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZZPlayer_Tests/Pods-ZZPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* ZZViewController.h */,
 				6003F5A6195388D20070C39A /* ZZViewController.m */,
+				69E943D021BA439000F32A08 /* ZZPlayControlVC.h */,
+				69E943D121BA439000F32A08 /* ZZPlayControlVC.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6939E62B21AB914300E57989 /* 1.jpg */,
 				6939E63321ABD71000E57989 /* story.mp4 */,
@@ -598,6 +603,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69C308D121B5276F00AD436B /* ZZDanMuView.m in Sources */,
+				69E943D221BA439000F32A08 /* ZZPlayControlVC.m in Sources */,
 				6003F59E195388D20070C39A /* ZZAppDelegate.m in Sources */,
 				6939E61E21A6B55500E57989 /* UIView+ZZFrame.m in Sources */,
 				6939E5BF21A695A900E57989 /* ZZVideoModel.m in Sources */,

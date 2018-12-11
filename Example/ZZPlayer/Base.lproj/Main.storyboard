@@ -219,12 +219,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rSe-bb-TYl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="633"/>
+            <point key="canvasLocation" x="794" y="1092"/>
         </scene>
-        <!--View Controller-->
+        <!--Play ControlVC-->
         <scene sceneID="QER-W2-bP3">
             <objects>
-                <viewController id="zMW-62-0zX" sceneMemberID="viewController">
+                <viewController id="zMW-62-0zX" customClass="ZZPlayControlVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aH1-ua-1hp"/>
                         <viewControllerLayoutGuide type="bottom" id="CfH-o5-I6h"/>
@@ -238,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hA-qL-bBY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1934" y="620"/>
+            <point key="canvasLocation" x="2078" y="451"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h7z-OL-QUg">
