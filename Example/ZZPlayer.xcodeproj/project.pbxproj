@@ -69,7 +69,6 @@
 		698A563921AE9B2B00522C8C /* UIViewController+ZZShouldAutorotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6939E5D321A69F6B00E57989 /* UIViewController+ZZShouldAutorotate.m */; };
 		69C308C721B51E6400AD436B /* ZZBasePlayerLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C308C621B51E6400AD436B /* ZZBasePlayerLayoutView.m */; };
 		69C308CE21B5240500AD436B /* NSObject+ZZRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C308CD21B5240500AD436B /* NSObject+ZZRotation.m */; };
-		69C308D121B5276F00AD436B /* ZZDanMuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C308D021B5276F00AD436B /* ZZDanMuView.m */; };
 		69E943D221BA439000F32A08 /* ZZPlayControlVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69E943D121BA439000F32A08 /* ZZPlayControlVC.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
@@ -170,8 +169,6 @@
 		69C308C621B51E6400AD436B /* ZZBasePlayerLayoutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZBasePlayerLayoutView.m; sourceTree = "<group>"; };
 		69C308CC21B5240500AD436B /* NSObject+ZZRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+ZZRotation.h"; sourceTree = "<group>"; };
 		69C308CD21B5240500AD436B /* NSObject+ZZRotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ZZRotation.m"; sourceTree = "<group>"; };
-		69C308CF21B5276F00AD436B /* ZZDanMuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZDanMuView.h; sourceTree = "<group>"; };
-		69C308D021B5276F00AD436B /* ZZDanMuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZDanMuView.m; sourceTree = "<group>"; };
 		69E943D021BA439000F32A08 /* ZZPlayControlVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZPlayControlVC.h; sourceTree = "<group>"; };
 		69E943D121BA439000F32A08 /* ZZPlayControlVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZZPlayControlVC.m; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -331,8 +328,6 @@
 				698A563421AD19C500522C8C /* ZZPlayer.m */,
 				6939E5B621A695A900E57989 /* ZZVideoModel.h */,
 				6939E5B921A695A900E57989 /* ZZVideoModel.m */,
-				69C308CF21B5276F00AD436B /* ZZDanMuView.h */,
-				69C308D021B5276F00AD436B /* ZZDanMuView.m */,
 			);
 			path = ZZPlayer;
 			sourceTree = "<group>";
@@ -602,7 +597,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69C308D121B5276F00AD436B /* ZZDanMuView.m in Sources */,
 				69E943D221BA439000F32A08 /* ZZPlayControlVC.m in Sources */,
 				6003F59E195388D20070C39A /* ZZAppDelegate.m in Sources */,
 				6939E61E21A6B55500E57989 /* UIView+ZZFrame.m in Sources */,

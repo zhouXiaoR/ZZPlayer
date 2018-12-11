@@ -33,8 +33,6 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self setUp];
-        UICollectionViewFlowLayout * out;
-        out.scrollDirection;
     }
     return self;
 }
@@ -87,86 +85,18 @@
 
     NSLog(@"单击了屏幕");
 
-    if (self.singleTapped)
-        self.singleTapped(self);
+    if (self.singleTapGesture){
+        self.singleTapGesture(self);
+    }
 }
 
 - (void)handleDoubleTap:(UITapGestureRecognizer *)tap {
-
     NSLog(@"双击了屏幕");
 
-    if (self.doubleTapped) self.doubleTapped(self);
-}
-
-
-
-#pragma mark - getter
-
-- (UIButton *)backButton{
-    if (_backButton == nil) {
-        UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.backgroundColor = [UIColor redColor];
-        [backButton setTitle:@"返回" forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(playerBack:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:backButton];
-        _backButton = backButton;
+    if (self.doubleTapGeture){
+        self.doubleTapGeture(self);
     }
-    return _backButton;
 }
-
-- (UIView *)playerControlTopView{
-    if (_playerControlTopView == nil) {
-        UIView * pcv = [[UIView alloc]init];
-        pcv.backgroundColor=[UIColor darkGrayColor];
-        [self addSubview:pcv];
-        _playerControlTopView = pcv;
-    }
-    return _playerControlTopView;
-}
-
-- (UIView *)playerControlBottomView{
-    if (_playerControlBottomView == nil) {
-        UIView * pcv = [[UIView alloc]init];
-        pcv.backgroundColor=[UIColor darkGrayColor];
-        [self addSubview:pcv];
-        _playerControlBottomView = pcv;
-    }
-    return _playerControlBottomView;
-}
-
-- (UIView *)betLineView{
-    if (_betLineView == nil) {
-        UIView * blv = [[UIView alloc]init];
-        blv.backgroundColor = [UIColor redColor];
-        [self addSubview:blv];
-        _betLineView = blv;
-    }
-    return _betLineView;
-}
-
-
-- (UITapGestureRecognizer *)singleTap {
-    if (!_singleTap){
-        _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    }
-    return _singleTap;
-}
-
-- (UITapGestureRecognizer *)doubleTap {
-    if (!_doubleTap) {
-        _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-        _doubleTap.numberOfTapsRequired = 2;
-    }
-    return _doubleTap;
-}
-
-- (UIPanGestureRecognizer *)panGR {
-    if (!_panGR) {
-        _panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    }
-    return _panGR;
-}
-
 
 - (void)handlePan:(UIPanGestureRecognizer *)pan {
     CGPoint translate = [pan translationInView:pan.view];
@@ -244,5 +174,73 @@
     self.previousPanPoint = translate;
     [pan setTranslation:CGPointZero inView:pan.view];
 }
+
+#pragma mark - getter
+
+- (UIButton *)backButton{
+    if (_backButton == nil) {
+        UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        backButton.backgroundColor = [UIColor redColor];
+        [backButton setTitle:@"返回" forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(playerBack:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:backButton];
+        _backButton = backButton;
+    }
+    return _backButton;
+}
+
+- (UIView *)playerControlTopView{
+    if (_playerControlTopView == nil) {
+        UIView * pcv = [[UIView alloc]init];
+        pcv.backgroundColor=[UIColor darkGrayColor];
+        [self addSubview:pcv];
+        _playerControlTopView = pcv;
+    }
+    return _playerControlTopView;
+}
+
+- (UIView *)playerControlBottomView{
+    if (_playerControlBottomView == nil) {
+        UIView * pcv = [[UIView alloc]init];
+        pcv.backgroundColor=[UIColor darkGrayColor];
+        [self addSubview:pcv];
+        _playerControlBottomView = pcv;
+    }
+    return _playerControlBottomView;
+}
+
+- (UIView *)betLineView{
+    if (_betLineView == nil) {
+        UIView * blv = [[UIView alloc]init];
+        blv.backgroundColor = [UIColor redColor];
+        [self addSubview:blv];
+        _betLineView = blv;
+    }
+    return _betLineView;
+}
+
+
+- (UITapGestureRecognizer *)singleTap {
+    if (!_singleTap){
+        _singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    }
+    return _singleTap;
+}
+
+- (UITapGestureRecognizer *)doubleTap {
+    if (!_doubleTap) {
+        _doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+        _doubleTap.numberOfTapsRequired = 2;
+    }
+    return _doubleTap;
+}
+
+- (UIPanGestureRecognizer *)panGR {
+    if (!_panGR) {
+        _panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    }
+    return _panGR;
+}
+
 
 @end

@@ -18,7 +18,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.playerControlView.frame = CGRectMake(30, 100, self.view.bounds.size.width - 60, 300);
+
+    [self setUpCallBack];
 }
+
+#pragma mark -
+
+- (void)setUpCallBack{
+    [self.playerControlView setSingleTapGesture:^(ZZPlayerControlView * _Nonnull controlView) {
+
+    }];
+
+    [self.playerControlView setDoubleTapGeture:^(ZZPlayerControlView * _Nonnull controlView) {
+
+    }];
+
+    [self.playerControlView setBeganPanGesture:^(ZZPlayerControlView * _Nonnull controlView, ZZControlViewPanDirection direction, ZZControlViewPanLocationType location) {
+
+    }];
+
+    [self.playerControlView setChangedMovingPanGesture:^(ZZPlayerControlView * _Nonnull controlView, ZZControlViewPanDirection direction, ZZControlViewPanLocationType location, CGPoint velocity) {
+
+    }];
+
+    [self.playerControlView setEndedPanGuesture:^(ZZPlayerControlView * _Nonnull controlView, ZZControlViewPanDirection direction, ZZControlViewPanLocationType location) {
+
+    }];
+}
+
+
+#pragma mark - getter
 
 - (ZZPlayerControlView *)playerControlView{
     if (_playerControlView == nil) {
@@ -33,6 +62,5 @@
     }
     return _playerControlView;
 }
-
 
 @end

@@ -38,13 +38,14 @@ typedef NS_ENUM(NSUInteger, ZZControlViewMoveDirection) {
 
 @property(nonatomic,assign)BOOL fullScreen;
 
+@property (nonatomic, copy) void(^singleTapGesture)(ZZPlayerControlView  *controlView);
 
-@property (nonatomic, copy) void(^singleTapped)(ZZPlayerControlView  *controlView);
-
-@property (nonatomic, copy) void(^doubleTapped)(ZZPlayerControlView *controlView);
+@property (nonatomic, copy) void(^doubleTapGeture)(ZZPlayerControlView *controlView);
 
 @property (nonatomic, copy) void(^beganPanGesture)(ZZPlayerControlView *controlView, ZZControlViewPanDirection direction, ZZControlViewPanLocationType location);
+
 @property (nonatomic, copy) void(^changedMovingPanGesture)(ZZPlayerControlView *controlView, ZZControlViewPanDirection direction, ZZControlViewPanLocationType location, CGPoint velocity);
+
 @property (nonatomic, copy) void(^endedPanGuesture)(ZZPlayerControlView *controlView, ZZControlViewPanDirection direction, ZZControlViewPanLocationType location);
 
 
